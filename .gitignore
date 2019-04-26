@@ -1,3 +1,9 @@
+# ~ Files
+*~
+
+# MySQL backup
+mysql/
+ 
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
