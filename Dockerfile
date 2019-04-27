@@ -13,5 +13,6 @@ RUN ln -f /usr/bin/pip3 /usr/bin/pip
 RUN pip install --upgrade pip
 COPY ./requirements.txt /requirements.txt
 RUN pip install -r /requirements.txt
+WORKDIR /var/www/html/ConsumerAffairs
 EXPOSE 80 80
 CMD ["apache2ctl", "-D", "FOREGROUND"]

@@ -17,17 +17,19 @@ Instructions for Local Setup:
 	with administrative priviledge:
 	$ sudo docker-compose build
 	$ sudo docker-compose up -d
-8. You can now connect to the REST API endpoints at http://localhost
-9. You can also view the database tables using PhpMyAdmin at http://localhost:8080/ using
+8. To run migrations, run the following command with administrative priviledge:
+	$ sudo docker exec -it django-apache2 python manage.py migrate
+9. You can now connect to the REST API endpoints at http://localhost
+10. You can also view the database tables using PhpMyAdmin at http://localhost:8080/ using
 	the same credentials that are in mysql.env 
-10. Any code change you make on the django folder ConsumerAffairs/ConsumerAffairs will be
+11. Any code change you make on the django folder ConsumerAffairs/ConsumerAffairs will be
 	reflected on http://localhost
-11. To add/remove any library from use in the django app, add/remove the library 
+12. To add/remove any library from use in the django app, add/remove the library 
 	in requirements.txt and run the following commands with administrative priviledge
 	from the project folder:
 	$ sudo docker-compose build
 	$ sudo docker-compose up -d
-12. To stop the docker containers, go to the project folder and run this command with
+13. To stop the docker containers, go to the project folder and run this command with
 	administrative priviledge:
 	$ sudo docker-compose stop
 
