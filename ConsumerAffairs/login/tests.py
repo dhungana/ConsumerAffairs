@@ -37,7 +37,7 @@ class LoginTestCase(TestCase):
 		self.assertNotEqual(token1, token2)
 
 	def test_invalid_login_cannot_get_tokens(self):
-		'''Invalid loginc cannot get tokens'''
+		'''Invalid login cannot get tokens'''
 		client = Client()
 		response = client.post('/login/', {'username': 'user1', 'password': 'invalidPass'}, format='json')
 		self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)

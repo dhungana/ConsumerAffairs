@@ -30,9 +30,8 @@ Instructions for Local Setup:
 13. You can also view the database tables using PhpMyAdmin at http://localhost:8080/ using
 	the same credentials that are in mysql.env 
 14. To reflect any code change you make on the django folder ConsumerAffairs/ConsumerAffairs,
-	run the following commands:
-	$ sudo docker-compose build
-	$ sudo docker-compose up -d
+	run the following command:
+	$ sudo docker exec -it django-apache2 service apache2 restart
 15. To add/remove any library from use in the django app, add/remove the library 
 	in requirements.txt and run the following commands with administrative priviledge
 	from the project folder:
@@ -43,6 +42,12 @@ Instructions for Local Setup:
 17. To check coverage, run the following commands:
 	$ sudo docker exec -it django-apache2 coverage run --source='.' manage.py test
 	$ sudo docker exec -it django-apache2 coverage report
-16. To stop the docker containers, go to the project folder and run this command with
+18. To stop the docker containers, go to the project folder and run this command with
 	administrative priviledge:
 	$ sudo docker-compose stop
+
+
+
+API Documentation:
+
+You can find API Documentation at https://documenter.getpostman.com/view/477052/S1LpaC6B

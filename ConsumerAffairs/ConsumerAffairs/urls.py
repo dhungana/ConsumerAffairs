@@ -16,8 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from rest_framework.authtoken import views
+from rest_framework import permissions
+from rest_framework.routers import SimpleRouter
+from review.views import ReviewViewSet
+
+router = SimpleRouter()
+router.register(r'reviews', ReviewViewSet, base_name='review')
 
 urlpatterns = [
 	path('admin/', admin.site.urls),
 	path('login/', views.obtain_auth_token),
 ]
+
+urlpatterns += router.urls

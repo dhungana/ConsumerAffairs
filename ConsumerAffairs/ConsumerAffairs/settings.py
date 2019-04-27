@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 	'rest_framework.authtoken',
 	'corsheaders',
 	'login.apps.LoginConfig',
+	'review.apps.ReviewConfig',
 ]
 
 MIDDLEWARE = [
@@ -138,3 +139,6 @@ REST_FRAMEWORK = {
 		'rest_framework.permissions.IsAuthenticated',
 	)
 }# https://docs.djangoproject.com/en/2.1/howto/static-files/
+
+
+
