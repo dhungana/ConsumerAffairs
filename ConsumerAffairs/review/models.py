@@ -21,9 +21,6 @@ class Review(models.Model):
 	submitted_date = models.DateField()
 	company = models.ForeignKey(Company, on_delete=models.CASCADE)
 	reviewer = models.ForeignKey(User, on_delete=models.CASCADE)
-
-	def __str__(self):
-		return self.title
 		
 	class Meta:
 		ordering = ['id']

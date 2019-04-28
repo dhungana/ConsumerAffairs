@@ -1,13 +1,12 @@
 from rest_framework import viewsets, mixins
 from .models import Review
 from .serializers import ReviewCreateSerializer, ReviewRetrieveSerializer
-from .permissions import IsOwner
 from rest_framework.permissions import IsAuthenticated
 from ipware import get_client_ip
 import datetime
 
 class ReviewViewSet(mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet):
-	permission_classes = (IsAuthenticated&IsOwner,)
+	permission_classes = (IsAuthenticated,)
 
 	def perform_create(self, serializer):
 		ip_address, is_routable = get_client_ip(self.request)
