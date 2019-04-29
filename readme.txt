@@ -18,17 +18,18 @@ Instructions for Local Setup:
 	with administrative priviledge:
 	$ sudo docker-compose build
 	$ sudo docker-compose up -d
-8. To run migrations, run the following command with administrative priviledge:
+8. To run migrations, run the following command:
 	$ sudo docker exec -it django-apache2 python manage.py migrate
 9. To create a super user, run the following command:
 	$ sudo docker exec -it django-apache2 python manage.py createsuperuser
 10. To make the admin panel view look better, run the following command:
 	$ sudo docker exec -it django-apache2 python manage.py collectstatic
 11. Login to admin panel at http://localhost/admin and create users and companies.
+	This way, you can setup all the data you want.
 	You can also view submitted reviews here.
 12. You can now connect to the REST API endpoints at http://localhost
 13. You can also view the database tables using PhpMyAdmin at http://localhost:8080/ using
-	the same credentials that are in mysql.env 
+	the same credentials that are in mysql.env (username is root)
 14. To reflect any code change you make on the django folder ConsumerAffairs/ConsumerAffairs,
 	run the following command:
 	$ sudo docker exec -it django-apache2 service apache2 restart
@@ -50,4 +51,89 @@ Instructions for Local Setup:
 
 API Documentation:
 
-You can find API Documentation at https://documenter.getpostman.com/view/477052/S1LpaC6B
+1. /login/
+	Users can login using username and password to get token which is used for other endpoints.
+
+	method: POST
+	request body:
+		{
+			username: required
+			password: required
+		}
+	response body:
+		{
+			token: <authorization token>
+		}
+
+2. /reviews/
+	Users can submit reviews submitted by themselves. Token must be included in AUTHORIZATION header
+
+	method: POST
+	headers: 
+		{
+			AUTHORIZATION: Token <authorization token> 
+		}
+	request body:
+		{
+			rating: required (between 1 and 5)
+			title: required
+			summary: required
+			company: required (id of company)
+		}
+
+3. /reviews/
+	Users can get reviews submitted by themselves. Token must be included in AUTHORIZATION header
+
+	method: GET
+	headers: 
+		{
+			AUTHORIZATION: Token <authorization token> 
+		}
+	response body:
+		[
+			{ 
+				id: <review id>
+				rating: <review rating>
+				title: <review title>
+				summary: <review summary>
+				submitted_date: <review submitted_date>
+				company: 
+					{
+						id: <company id>
+						name: <company name>
+						description: <company description>
+						url: <company url>
+					}
+			},
+			...
+		]
+
+4. /reviews/:id/
+	Users can get a particular review submitted by themselves with the given id. 
+	Token must be included in AUTHORIZATION header
+
+	method: GET
+	headers: 
+		{
+			AUTHORIZATION: Token <authorization token> 
+		}
+	response body:
+		{ 
+			id: <review id>
+			rating: <review rating>
+			title: <review title>
+			summary: <review summary>
+			submitted_date: <review submitted_date>
+			company: 
+				{
+					id: <company id>
+					name: <company name>
+					description: <company description>
+					url: <company url>
+				}
+		}
+
+Note on Coverage:
+
+There are a few lines of codes not covered. One is for not being able to detect ip.
+Others are for making the admin view look nicer. 
